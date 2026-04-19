@@ -1,0 +1,38 @@
+name: Security Pipeline (DevSecOps)
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 1. Snyk — сканирование зависимостей
+      - name: Snyk SCA Scan
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=critical --fail-on=all
+
+      # 2. Trivy — поиск секретов
+      - name: Trivy Secret Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scanners: 'secret'
+          severity: 'HIGH,CRITICAL'
+          exit-code: '1'
+
+      # 3. CodeQL — статический анализ кода
+      - name: CodeQL SAST
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+      - uses: github/codeql-action/analyze@v3
