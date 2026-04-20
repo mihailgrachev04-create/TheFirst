@@ -29,6 +29,7 @@ jobs:
           scanners: 'secret'
           severity: 'HIGH,CRITICAL'
           exit-code: '1'
+          format: 'table'
 
       # 3. CodeQL — статический анализ кода
       - name: CodeQL SAST
