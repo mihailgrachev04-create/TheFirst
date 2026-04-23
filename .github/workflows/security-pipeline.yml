@@ -48,7 +48,6 @@ jobs:
         with:
           scan-type: 'fs'
           scanners: 'secret'
-          severity: 'HIGH,CRITICAL'
           exit-code: '1'
           format: 'table'
           ignore-unfixed: false
