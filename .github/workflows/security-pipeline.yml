@@ -49,7 +49,6 @@ jobs:
           scanners: 'secret'
           exit-code: '1'
           format: 'table'
-          secret-config: .trivy/secret.yaml
 
   # 4. CodeQL SAST (статический анализ кода)
   codeql-sast:
