@@ -1,9 +1,0 @@
-# trivy.yaml
-secret:
-  config: .trivy/secret.yaml
-exit-code: 1
-format: table
-scanners: ["secret"]
-severity:
-  - CRITICAL
-  - HIGH
