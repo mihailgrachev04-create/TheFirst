@@ -42,19 +42,14 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v4
-
-      - name: Trivy Secret Scan (усиленный)
+      - name: Trivy Secret Scan
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
           scanners: 'secret'
           exit-code: '1'
           format: 'table'
-          ignore-unfixed: false
-          trivyignores: ''   # если есть .trivyignore — игнорировать не будет
-          # Дополнительные параметры для лучшего поиска:
-          scan-ref: '.'
-          skip-dirs: 'node_modules'
+          cache: false
 
   # 4. CodeQL SAST (статический анализ кода)
   codeql-sast:
