@@ -27,7 +27,8 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v4
-
+      - name: Install dependencies
+        run: npm install
       - name: Snyk SCA Scan
         uses: snyk/actions/node@master
         env:
