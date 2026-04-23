@@ -55,6 +55,10 @@ jobs:
   codeql-sast:
     runs-on: ubuntu-latest
     needs: build
+    permissions:
+      security-events: write   # требуется для загрузки SARIF-отчёта
+      actions: read
+      contents: read
     steps:
       - uses: actions/checkout@v4
 
