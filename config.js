@@ -1,3 +1,3 @@
-const awsKey = "AKIAIOSFODNN7EXAMPLE";   // AWS Access Key
-const password = "SuperSecretPassword123!@#";
+const awsKey = "AKIA7YH45KJH67D89QWE";
+const password = "ProdPassword2026!@#";
 console.log("Секреты загружены");
