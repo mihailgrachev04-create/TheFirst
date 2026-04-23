@@ -36,22 +36,20 @@ jobs:
         with:
           args: --severity-threshold=high --fail-on=all
 
-  # 3. Trivy Secret Scan (поиск секретов)
-  trivy-secret-scan:
+  # 3. Gitleaks Secret Scan (поиск секретов)
+  gitleaks-secret-scan:
     runs-on: ubuntu-latest
+    needs: build
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Run Trivy Secret Scan
-        uses: aquasecurity/trivy-action@0.35.0
         with:
-          scan-type: fs
-          scan-ref: .
-          scanners: secret
-          format: table
-          exit-code: 1
-          hide-progress: true
+          fetch-depth: 0
+
+      - name: Run Gitleaks Scan
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # 4. CodeQL SAST (статический анализ кода)
   codeql-sast:
