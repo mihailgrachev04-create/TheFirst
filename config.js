@@ -1,3 +1,3 @@
-const awsKey = "AKIA7YH45KJH67D89QWP";
-const password = "ProdPassword2026!@#";
+const awsKey = process.env.AWS_KEY;
+const password = process.env.APP_PASSWORD;
 console.log("Секреты загружены");
