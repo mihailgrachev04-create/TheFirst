@@ -1,7 +1,11 @@
 {
   "name": "diploma-demo",
   "version": "1.0.0",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
-    "lodash": "4.18.1"        
+    "express": "^4.18.2",
+    "lodash": "4.18.1"
   }
 }
