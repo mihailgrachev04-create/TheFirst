@@ -23,7 +23,7 @@ app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
 
   res.setHeader('Permissions-Policy', 'geolocation=()');
-
+  res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
   next();
 });
 
@@ -33,7 +33,7 @@ app.get('/robots.txt', (req, res) => {
 });
 
 app.get('/sitemap.xml', (req, res) => {
-  res.type('application/xml').send('<?xml version="1.0"?><urlset></urlset>');
+  res.type('application/xml; charset=utf-8').send('<?xml version="1.0" encoding="UTF-8"?><urlset></urlset>');
 });
 
 app.get('/', (req, res) => {
