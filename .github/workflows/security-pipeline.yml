@@ -88,7 +88,7 @@ jobs:
       - name: Run OWASP ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.7.0
         with:
-          target: 'http://localhost:3000'        # ← измени порт, если у тебя другой
+          target: 'http://localhost:3000'
           cmd_options: '-a -r zap-report.html --min-level High'
           allow_fail: false
 
