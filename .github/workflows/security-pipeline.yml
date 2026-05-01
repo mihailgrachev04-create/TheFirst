@@ -72,33 +72,29 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
   # 5. DAST (OWASP ZAP)
-  dast-scan:
+  zap-dast:
     runs-on: ubuntu-latest
     needs: build
-
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Start application
+      - name: Start application for DAST testing
         run: |
-          npm start &
+          npm install
+          npm start & 
+          echo "Waiting for application to start..."
           sleep 15
 
       - name: Run OWASP ZAP Baseline Scan
-        run: |
-          docker run --rm \
-            --network="host" \
-            -v ${{ github.workspace }}:/zap/wrk/:rw \
-            ghcr.io/zaproxy/zaproxy:stable \
-            zap-baseline.py \
-            -t http://localhost:3000 \
-            -r zap-report.html
+        uses: zaproxy/action-baseline@v0.7.0
+        with:
+          target: 'http://localhost:3000'        # ← измени порт, если у тебя другой
+          cmd_options: '-a -r zap-report.html --min-level High'
+          allow_fail: false
 
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: zap-report
           path: zap-report.html
