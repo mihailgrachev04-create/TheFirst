@@ -1,2 +1,3 @@
-const secret = "AKIAIOSFODNN7EXAMPLE1234567890"; //ложный ключ
-console.log("Секрет загружен");
+const awsKey = process.env.AWS_KEY;
+const password = process.env.APP_PASSWORD;
+console.log("Секреты загружены");
