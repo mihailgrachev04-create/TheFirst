@@ -10,7 +10,8 @@ app.use((req, res, next) => {
   // Полный CSP (исправляет warning 10055)
   res.setHeader(
     'Content-Security-Policy',
-    "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+    "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self';" +
+    "object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
   );
 
   // Новый заголовок (исправляет COOP)
@@ -33,7 +34,8 @@ app.get('/robots.txt', (req, res) => {
 });
 
 app.get('/sitemap.xml', (req, res) => {
-  res.type('application/xml; charset=utf-8').send('<?xml version="1.0" encoding="UTF-8"?><urlset></urlset>');
+  res.type('application/xml; charset=utf-8')
+     .send('<?xml version="1.0" encoding="UTF-8"?><urlset></urlset>');
 });
 
 app.get('/', (req, res) => {
